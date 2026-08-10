@@ -1,0 +1,9 @@
+{
+    "active": "env_uv",
+    "envs": {
+        "env_uv": {
+            "type": "uv",
+            "path": "./env_uv"
+        }
+    }
+}
