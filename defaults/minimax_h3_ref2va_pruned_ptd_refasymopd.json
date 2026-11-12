@@ -4,8 +4,26 @@
         "architecture": "minimax_h3_ref2va_pruned",
         "description": "Lower-memory, accelerated H3 Ref2VA for generating video with synchronized sound from a prompt and reference images in 8 steps instead of the standard 40. It combines the smaller 20B pruned base with RefAsymOPD, which targets sharper details and more believable, realistic backgrounds than plain PTD at the same step count. Choose it when the 33B RefAsymOPD version needs too much memory; pruning and acceleration can affect quality compared with standard H3.",
         "URLs": "minimax_h3_ref2va_pruned",
-        "loras": "minimax_h3_ref2va_ptd_refasymopd",
-        "loras_multipliers": "minimax_h3_ref2va_ptd_refasymopd",
+        "loras": [
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop01_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop02_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop03_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop04_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop05_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop06_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop07_bf16.safetensors|ptd_refasymopd",
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/ptd_refasymopd/minimax_h3_ref2va_ptd_refasymopd_8step_hop08_bf16.safetensors|ptd_refasymopd"
+        ],
+        "loras_multipliers": [
+            "1,0,0,0,0,0,0,0",
+            "0,1,0,0,0,0,0,0",
+            "0,0,1,0,0,0,0,0",
+            "0,0,0,1,0,0,0,0",
+            "0,0,0,0,1,0,0,0",
+            "0,0,0,0,0,1,0,0",
+            "0,0,0,0,0,0,1,0",
+            "0,0,0,0,0,0,0,1"
+        ],
         "pdd": true,
         "ptd": true
     },

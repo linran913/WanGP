@@ -4,10 +4,21 @@
         "architecture": "minimax_h3_fl2va_pruned",
         "description": "Pruned MiniMax H3 FL2VA with trained VDN hybrid window/linear attention for faster long-video generation. Triton is required for optimal performance. The VDN 8-step acceleration LoRA is automatically loaded.",
         "URLs": "minimax_h3_fl2va_pruned",
-        "modules": "minimax_h3_vdn",
-        "loras": "minimax_h3_vdn",
-        "loras_multipliers": ["1"],
-        "preload_URLs": "minimax_h3_vdn",
+        "modules": [
+            [
+                "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/modules/minimax_h3_vdn_module_bf16.safetensors",
+                "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/modules/minimax_h3_vdn_module_int8_convrot.safetensors"
+            ]
+        ],
+        "loras": [
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/minimax_h3_vdn_default_lora_bf16.safetensors"
+        ],
+        "loras_multipliers": [
+            "1"
+        ],
+        "preload_URLs": [
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/minimax_h3_vdn_turbo_8step_lora_bf16.safetensors|%lora_dir"
+        ],
         "vdn": true
     },
     "num_inference_steps": 8,

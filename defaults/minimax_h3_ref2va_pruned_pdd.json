@@ -4,9 +4,15 @@
         "architecture": "minimax_h3_ref2va_pruned",
         "description": "Uses the smaller pruned model to generate synchronized video and audio from text and reference media. Each PDD step merges four learned denoising-interval outputs, covering 32 intervals in only 8 model evaluations.",
         "URLs": "minimax_h3_ref2va_pruned",
-        "modules": ["minimax_h3_ref2va_pdd"],
-        "loras": "minimax_h3_ref2va_pdd",
-        "loras_multipliers": "minimax_h3_ref2va_pdd",
+        "modules": [
+            "minimax_h3_ref2va_pdd"
+        ],
+        "loras": [
+            "https://huggingface.co/DeepBeepMeep/MiniMax-H3/resolve/main/loras/minimax_h3_ref2va_pdd_8step_lora_bf16.safetensors"
+        ],
+        "loras_multipliers": [
+            "1"
+        ],
         "pdd": true
     },
     "num_inference_steps": 8,
