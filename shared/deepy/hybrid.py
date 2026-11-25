@@ -401,6 +401,25 @@ class HybridService(DeepyService):
             self.close()
 
 
+class FrontendGZipMiddleware:
+    """Compress the Gradio page and frontend assets while leaving event streams and media alone."""
+
+    def __init__(self, app):
+        from starlette.middleware.gzip import GZipMiddleware
+        self.app = app
+        self.gzip = GZipMiddleware(app, minimum_size=1024, compresslevel=4)
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http" and scope["method"] == "GET":
+            path = scope["path"].removeprefix(scope.get("root_path", "").rstrip("/"))
+            if path in ("", "/") or (
+                path.startswith(("/assets/", "/gradio_api/custom_component/"))
+                and path.endswith((".js", ".css"))
+            ):
+                return await self.gzip(scope, receive, send)
+        return await self.app(scope, receive, send)
+
+
 def launch_gradio(demo, service, args, **kwargs):
     """Use Gradio's supported lifespan hook to mount the shared Web application."""
     from shared.deepy.server import server_options
@@ -438,7 +457,7 @@ def launch_gradio(demo, service, args, **kwargs):
     from shared.gradio.proxy_public_url import PublicURLMiddleware
     from shared.apps.server import AppFrameGuard
     from shared.utils.plugin_navigation import AddonNavigationMiddleware
-    middleware = [Middleware(AppFrameGuard), Middleware(WebAuthMiddleware, auth=auth), Middleware(AddonNavigationMiddleware)]
+    middleware = [Middleware(AppFrameGuard), Middleware(WebAuthMiddleware, auth=auth), Middleware(FrontendGZipMiddleware), Middleware(AddonNavigationMiddleware)]
     if auth.public_url is not None:
         middleware.insert(0, Middleware(PublicURLMiddleware, public_url=auth.public_url))
     if https_port is not None:
